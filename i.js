@@ -63,7 +63,7 @@ init=function(){
 	//Recieve data
 	var subjs=[];
 	for (i=0;i< d[0].length; i++){
-		subjs.push([d[0][i],new dot((ca.height/d.length)*i, i*(ca.width/d.length)).draw()]);
+		subjs.push([d[0][i],new dot((ca.height/d.length)*i, i*(ca.width/d.length))]);
 	}
 	window.g=subjs;
 	for(i=0;i<d[1].length;i++){
@@ -71,6 +71,7 @@ init=function(){
 		for (m=0;m<subjs.length;m++){
 			if(subjs[m][0]==d[1][i][0]){
 				//draw line to center of screen
+				subjs[m][1].draw();
 				new line(new point(subjs[m][1].x, subjs[m][1].y), new point(ca.width, ca.height/2)).draw();
 			}
 		}
