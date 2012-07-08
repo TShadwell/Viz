@@ -64,6 +64,7 @@ init=function(){
 	for (i=0;i< d[0].length; i++){
 		subjs.push([d[0][i],new dot((ca.height/d.length)*i, i*(ca.width/d.length)).draw()]);
 	}
+	window.g=subjs;
 	for(i=0;i<d[1].length;i++){
 		//draw lines from dots to center of screen
 		for (m=0;m<subjs.length;m++){
