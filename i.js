@@ -35,6 +35,7 @@ init=function(){
 			c.moveTo(this.pt1.x, this.pt1.y);
 			c.lineTo(this.pt2.x, this.pt2.y);
 			c.stroke();
+			return this;
 		}
 	}
 	var clear=function(callback){
@@ -54,4 +55,22 @@ init=function(){
 		})(0);
 	}
 	//Start being useful
+	var n  = location.hash.slice(1);
+
+
+	//Recieve data
+	var subjs=[];
+	for (i=0;i< d[0].length; i++){
+		subjs.push([d[0][i],new dot((ca.height/d.length)*i, i*(ca.width/d.length)).draw()]);
+	}
+	for(i=0;i<d[1].length;i++){
+		//draw lines from dots to center of screen
+		for (m=0;m<subjs.length;m++){
+			if(subjs[m][0]==d[1][i][0]){
+				//draw line to center of screen
+				new line(new point(subjs[m][1].x, subjs[m][1].y), new point(ca.width, ca.height/2)).draw();
+			}
+		}
+	}
+
 }
