@@ -63,7 +63,7 @@ init=function(){
 	//Recieve data
 	var subjs=[];
 	for (i=0;i< d[0].length; i++){
-		subjs.push([d[0][i],new dot((ca.height/d.length)*i,30)]);
+		subjs.push([d[0][i],new dot((ca.height/d.length),30)]);
 	}
 	window.g=subjs;
 	for(i=0;i<d[1].length;i++){
