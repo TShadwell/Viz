@@ -40,18 +40,16 @@ if(!getSet($args)){
 }
 else{
 	$hash=md5($args["hash"]);
-	$hashes=fopen("hashes.example");
+	$hashes=fopen("hashes","r");
 	$d=array();
 	$i=0;
 	while($i<$args["n"]){
-		if(($line=fgets($hashes)!==false)){
-			if($line[0]!=="#" ){
-				$cl=explode(":",$line);
-				if($cl[0]==$hash){
-				//Record hash
-					$d[]=explode(",",$cl[1]);
-					$i++;
-				}
+		if(($line=fgets($hashes))!==false){
+  		$cl=explode(":",$line);
+			if($cl[0]==$hash){
+	  		//Record hash
+				$d[]=explode(",",str_replace("\n","",$cl[1]));
+				$i++;
 			}
 		}
 		else{
