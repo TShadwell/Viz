@@ -72,7 +72,7 @@ init=function(){
 			if(subjs[m][0]==d[1][i][0]){
 				//draw line to center of screen
 				subjs[m][1].draw();
-				new line(new point(subjs[m][1].x, subjs[m][1].y), new point(ca.width, ca.height/2), cRed).draw();
+				new line(new point(subjs[m][1].y, subjs[m][1].x), new point(ca.width, ca.height/2), cRed).draw();
 			}
 		}
 	}
