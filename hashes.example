@@ -1,0 +1,3 @@
+# First part is alphabetically-sorted A-Level codes (same as code from API, but with KS5_ prefix removed). These are concatenated and hashed with MD5. Second part is alphabetically-sorted GCSE codes (same as code from API, but with KS4_ prefix removed), concatenated with commas.
+# GA_BUSGA_MATHGA_PHYSICS:APBUS,APDSCI,APELIT,APGEO,APGRA,APHIS,APRE,APSPAN
+4c028f48291cbb3cba1ee542f90a8d92:APBUS,APDSCI,APELIT,APGEO,APGRA,APHIS,APRE,APSPAN
