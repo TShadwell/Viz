@@ -56,7 +56,8 @@ init=function(){
 	}
 	//Start being useful
 	var n  = location.hash.slice(1);
-
+	$.ajax({ url: "readhashes.php?", dataType:"json" }).done(function(d) { 
+	
 
 	//Recieve data
 	var subjs=[];
@@ -72,5 +73,6 @@ init=function(){
 			}
 		}
 	}
+}
 
 }
