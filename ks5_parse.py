@@ -33,7 +33,7 @@ connection = pymongo.Connection('localhost', 27017)
 db = connection.schools_db
 collection = db.ks5
 
-students = collection.find(limit=50)
+students = collection.find()
 
 f = open("hashes", "w")
 f.write("\n".join(filter(lambda x: x != "", (exam_string(student) for student in students if a_level_string(student) != ""))))
