@@ -8,13 +8,13 @@ init=function(){
 	(resize = function() {
 		ca.width = d.documentElement.clientWidth;
 		ca.height = d.documentElement.clientHeight;
-		c.fillStyle = 'rgb(255,255,255)';
-		c.fillRect(0, 0, ca.width, ca.height);
 	})();
 	var point=function(x,y){
 		this.x=x;
 		this.y=y;
 	}
+	c.fillStyle = 'rgb(255,255,255)';
+	c.fillRect(0, 0, ca.width, ca.height);
 	window.addEventListener('resize', resize, false);
 	var dot=function(x,y, colour){
 		this.x=x;
@@ -40,5 +40,4 @@ init=function(){
 	var x;
 	c.linewidth=100;
 	(x = new line(new point(5,5), new point(10,10), "red")).draw();
-
 }
