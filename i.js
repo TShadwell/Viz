@@ -1,9 +1,10 @@
 //Fires on load
 init=function(){
-	var resize;
-	var d=document;
-	var dotRad=20;
-	var ca=d.getElementsByTagName("canvas")[0];
+	var resize, 
+	d=document, 
+	dotRad=20, 
+	ca=d.getElementsByTagName("canvas")[0],
+	cRed="#a04800";
 	var c=ca.getContext("2d");
 	(resize = function() {
 		ca.width = d.documentElement.clientWidth;
@@ -37,7 +38,8 @@ init=function(){
 	}
 	//draw a line as a test
 	c.strokeStyle="red";
-	var x;
-	c.linewidth=100;
-	(x = new line(new point(5,5), new point(10,10), "red")).draw();
+	var x, y;
+	c.lineWidth=20;
+	(x = new line(new point(5,5), new point(10,10), cRed)).draw();
+	(y = new line(new point(100,5), new point(10,10), "green")).draw();
 }
