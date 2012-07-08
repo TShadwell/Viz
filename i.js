@@ -29,13 +29,14 @@ init=function(){
 		this.pt1=point1;
 		this.pt2=point2;
 		this.colour=colour;
+		var a=this;
 		this.draw=function(){
 			c.beginPath();
 			c.strokeStyle=colour;
 			c.moveTo(this.pt1.x, this.pt1.y);
 			c.lineTo(this.pt2.x, this.pt2.y);
 			c.stroke();
-			return this;
+			return a;
 		}
 	}
 	var clear=function(callback){
