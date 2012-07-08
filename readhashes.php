@@ -35,23 +35,34 @@ function getSet(&$arr){
 	$arr=$out;
 	return true;
 }
-if(!getSet($args)){
-	display_error(0);
-}
-else{
+//if(!getSet($args)){
+//	display_error(0);
+//}
+
+$args["n"]=1000;
+$args["hash"]="GA_BIOLOGYGA_CHEMISTRYGA_MATHGA_PHYSICS";
+
+//else{
 	$hash=md5($args["hash"]);
-	$hashes=fopen("hashes.example");
+	$hashes=fopen("hashes","r");
 	$d=array();
+  $ss=array();
 	$i=0;
 	while($i<$args["n"]){
-		if(($line=fgets($hashes)!==false)){
-			if($line[0]!=="#" ){
-				$cl=explode(":",$line);
-				if($cl[0]==$hash){
-				//Record hash
-					$d[]=explode(",",$cl[1]);
-					$i++;
-				}
+		if(($line=fgets($hashes))!==false){
+  		$cl=explode(":",$line);
+			if($cl[0]==$hash){
+	  		//Record hash
+        $xs=explode(",",str_replace("\n","",$cl[1]));
+				if ($xs!=[""]) {
+          $d[]=$xs;
+        }
+        foreach($xs as $s) {
+          if (!(in_array($s, $ss))) {
+            $ss[]=$s;
+          }
+        }
+				$i++;
 			}
 		}
 		else{
@@ -59,6 +70,6 @@ else{
 			break;
 		}	
 	}
-	echo json_encode($d);
-}
+  echo json_encode([$ss,$d]);
+//}
 
