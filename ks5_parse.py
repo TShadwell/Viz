@@ -25,5 +25,5 @@ collection = db.ks5
 students = collection.find()
 
 f = open("hashes", "w")
-f.write("\n".join(a_level_hash(student) + ":" + gcse_string(student) for student in students))
+f.write("\n".join(a_level_hash(student) + ":" + gcse_string(student) for student in students if a_level_string(student) != ""))
 f.write("\n")
