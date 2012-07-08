@@ -53,11 +53,5 @@ init=function(){
 			}
 		})(0);
 	}
-	//draw a line as a test
-	c.strokeStyle="red";
-	var x, y;
-	c.lineWidth=20;
-	(x = new line(new point(5,5), new point(10,10), cRed)).draw();
-	(y = new line(new point(100,5), new point(10,10), "green")).draw();
-	clear();
+	//Start being useful
 }
