@@ -35,34 +35,30 @@ function getSet(&$arr){
 	$arr=$out;
 	return true;
 }
-//if(!getSet($args)){
-//	display_error(0);
-//}
-
-$args["n"]=1000;
-$args["hash"]="GA_BIOLOGYGA_CHEMISTRYGA_MATHGA_PHYSICS";
-
-//else{
+if(!getSet($args)){
+	display_error(0);
+}
+else{
 	$hash=md5($args["hash"]);
 	$hashes=fopen("hashes","r");
 	$d=array();
-  $ss=array();
-	$i=0;
+  	$seenSubjects=array();
+	$i=0; //$i counts up to $args["n"]- the number of student records to get.
 	while($i<$args["n"]){
 		if(($line=fgets($hashes))!==false){
-  		$cl=explode(":",$line);
+  			$cl=explode(":", $line); //Now [hash, listOfSubjects]
 			if($cl[0]==$hash){
-	  		//Record hash
-        $xs=explode(",",str_replace("\n","",$cl[1]));
-				if ($xs!=[""]) {
-          $d[]=$xs;
-        }
-        foreach($xs as $s) {
-          if (!(in_array($s, $ss))) {
-            $ss[]=$s;
-          }
-        }
-				$i++;
+	  			//Record hash
+        			$subjects=explode(",",str_replace("\n","",$cl[1]));
+				if ($subjects!=[""]) {
+          				$d[]=$subjects;
+        			}
+				foreach($subjects as $subject) {
+					if (!(in_array($subject, $seenSubjects))) {
+						$seenSubjects[]=$subject;
+					}
+				}
+			$i++;
 			}
 		}
 		else{
@@ -70,6 +66,6 @@ $args["hash"]="GA_BIOLOGYGA_CHEMISTRYGA_MATHGA_PHYSICS";
 			break;
 		}	
 	}
-  echo json_encode([$ss,$d]);
-//}
+  echo json_encode([$seenSubjects,$d]);
+}
 

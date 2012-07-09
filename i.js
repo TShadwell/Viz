@@ -75,6 +75,8 @@ init=function(){
 				new line(new point(subjs[m][1].y, subjs[m][1].x), new point(ca.width, ca.height/2), cRed).draw();
 				c.fillStyle="black";
 				c.fillText(subjs[m][0],subjs[m][1].y, subjs[m][1].x);
+				//Stop searching!
+				break;
 			}
 		}
 	}
