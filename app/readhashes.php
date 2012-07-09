@@ -66,6 +66,7 @@ else{
 			break;
 		}	
 	}
+	fclose($hashes);
   echo json_encode([$seenSubjects,$d]);
 }
 
