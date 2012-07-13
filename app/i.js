@@ -313,7 +313,7 @@ init=function(){
 			return ((x > y) ? -1 : ((x < y) ? 1 : 0));
 		}
 		var n  = location.hash.slice(1);
-		$.ajax({ url: "readhashes.php?n=100&hash=GA_BIOLOGYGA_CHEMISTRYGA_MATHGA_PHYSICS", dataType:"json" }).done(function(d) { 
+		$.ajax({ url: "readhashes.php?n=10000&hash=GA_BIOLOGYGA_CHEMISTRYGA_MATHGA_PHYSICS", dataType:"json" }).done(function(d) { 
 			/*d is the structure:
 			 * {Array.<Array.<string>, Array.<string>>}
 			 */
@@ -323,7 +323,7 @@ init=function(){
 			var lst=[];
 			var longName;
 
-			$.each(d[0], function(name, count){
+			$.each(d[1], function(name, count){
 				c+=count;
 				if(typeof (longName=subjectMap["GCSE"][name]) =="undefined"){
 					lst.push([name, count]);
@@ -332,9 +332,9 @@ init=function(){
 					lst.push([longName, count]);
 				}
 			});
-			$("#details").append("There are <big>"+c+"</big> GCSEs that have been taken to get to this A level set.<br/>");
+			$("#details").append("There are <big>"+c+"</big> GCSEs that have been taken to get to this A level set, by <big>"+d[0]+"</big> people.<br/>");
 			$.each(lst.sort(sortSubjects), function(i){
-				$("#details").append("<big>"+this[1]+"</big> "+((this[1]!==1)?"people":"person")+" took <big>"+this[0]+"</big>, "+roundNPlaces(((this[1]/c)*100),2)+"%.<br/>");
+				$("#details").append("<big>"+this[1]+"</big> "+((this[1]!==1)?"people":"person")+" took <big>"+this[0]+"</big>, "+roundNPlaces(((this[1]/d[0])*100),2)+"%.<br/>");
 			});
 		});
 	}

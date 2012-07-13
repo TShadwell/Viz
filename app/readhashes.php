@@ -45,6 +45,7 @@ else{
   	$seenSubjects=array();
   	$seenSubjects2=array();
 	$i=0; //$i counts up to $args["n"]- the number of student records to get.
+	$f=-1;
 	while($i<$args["n"]){
 		if(($line=fgets($hashes))!==false){
   			$cl=explode(":", $line); //Now [hash, listOfSubjects]
@@ -70,10 +71,14 @@ else{
 		}
 		else{
 			//All lines possible to read have been read
+			$f=$i;
 			break;
 		}	
 	}
+	if($f==-1){
+		$f=$_GET["n"];
+	}
 	fclose($hashes);
-  echo json_encode([$seenSubjects,$d]);
+  echo json_encode([$f, $seenSubjects,$d]);
 }
 
