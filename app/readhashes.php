@@ -1,6 +1,7 @@
 <?PHP
 //Reads a given number of hashes and stuff, returns JSON.
 //GET Arguments
+header("Content-type: application/json");
 $args=array(
 	"n",
 	"hash"
