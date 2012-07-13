@@ -43,6 +43,7 @@ else{
 	$hashes=fopen("hashes","r");
 	$d=array();
   	$seenSubjects=array();
+  	$seenSubjects2=array();
 	$i=0; //$i counts up to $args["n"]- the number of student records to get.
 	while($i<$args["n"]){
 		if(($line=fgets($hashes))!==false){
@@ -52,10 +53,16 @@ else{
         			$subjects=explode(",",str_replace("\n","",$cl[1]));
 				if ($subjects!=[""]) {
           				$d[]=$subjects;
-        			}
+        		}
 				foreach($subjects as $subject) {
-					if (!(in_array($subject, $seenSubjects))) {
-						$seenSubjects[]=$subject;
+					if($subject !== ""){
+						if (!(in_array($subject, $seenSubjects2))) {
+							$seenSubjects[$subject]=1;
+							$seenSubjects2[]=$subject;
+						}
+						else{
+							$seenSubjects[$subject]+=1;
+						}
 					}
 				}
 			$i++;

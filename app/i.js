@@ -297,37 +297,45 @@ init=function(){
 	}
 	nav=document.getElementsByTagName("nav")[0];
 	var displayData=function(){
+		var roundNPlaces=function(num, length){
+			var a;
+			return (
+				Math.round(num*(a=(Math.pow(10,length))))/a
+			);
+		}
+		var verboseRound=function(num){
+			var rounded;
+			return (rounded = Math.round(num))==0?"<1":((rounded==num)?rounded:"~"+rounded);
+		}
+		var sortSubjects = function(a,b){
+			var x=a[1];
+			var y=b[1];
+			return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+		}
 		var n  = location.hash.slice(1);
-		$.ajax({ url: "readhashes.php?n=10&hash=GA_BIOLOGYGA_CHEMISTRYGA_MATHGA_PHYSICS", dataType:"json" }).done(function(d) { 
+		$.ajax({ url: "readhashes.php?n=100&hash=GA_BIOLOGYGA_CHEMISTRYGA_MATHGA_PHYSICS", dataType:"json" }).done(function(d) { 
+			/*d is the structure:
+			 * {Array.<Array.<string>, Array.<string>>}
+			 */
+			//Make some stats
+			var str="";
+			var c=0;
+			var lst=[];
+			var longName;
 
-
-			//Recieve data
-			var subjs=[];
-			for (i=0;i< d[0].length; i++){
-				subjs.push([d[0][i],new dot((i*7+20),30)]);
-			}
-			window.g=subjs;
-			for(i=0;i<d[1].length;i++){
-				//draw lines from dots to center of screen
-				for (m=0;m<subjs.length;m++){
-					if(subjs[m][0]==d[1][i][0]){
-						//draw line to center of screen
-						subjs[m][1].draw();
-						new line(new point(subjs[m][1].y, subjs[m][1].x), new point(ca.width, ca.height/2), cRed).draw();
-						c.fillStyle="black";
-						var a;
-						if( typeof (a=subjectMap["GCSE"][subjs[m][0]])!== "undefined"){
-							c.fillText(a,subjs[m][1].y, subjs[m][1].x);
-						}
-						else{
-							c.fillText(subjs[m][0],subjs[m][1].y, subjs[m][1].x);
-						}
-						
-						//Stop searching!
-						break;
-					}
+			$.each(d[0], function(name, count){
+				c+=count;
+				if(typeof (longName=subjectMap["GCSE"][name]) =="undefined"){
+					lst.push([name, count]);
 				}
-			}
+				else{
+					lst.push([longName, count]);
+				}
+			});
+			$("#details").append("There are <big>"+c+"</big> GCSEs that have been taken to get to this A level set.<br/>");
+			$.each(lst.sort(sortSubjects), function(i){
+				$("#details").append("<big>"+this[1]+"</big> "+((this[1]!==1)?"people":"person")+" took <big>"+this[0]+"</big>, "+roundNPlaces(((this[1]/c)*100),2)+"%.<br/>");
+			});
 		});
 	}
 	displayData();
